@@ -15,7 +15,8 @@
  * for publishing and packages:read for the existence check.
  */
 import { execFileSync } from "node:child_process";
-import { existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 const REGISTRY = "https://npm.pkg.github.com";
@@ -24,6 +25,15 @@ if (!token) {
   console.error("NODE_AUTH_TOKEN is required");
   process.exit(1);
 }
+
+// npm publish runs inside each package directory, where this
+// repository's own .npmrc does not reach; hand npm an explicit
+// userconfig carrying the registry mapping and the token instead.
+const npmrcPath = join(mkdtempSync(join(tmpdir(), "npmrc-")), ".npmrc");
+writeFileSync(
+  npmrcPath,
+  `@karasu-lab:registry=${REGISTRY}\n//${new URL(REGISTRY).host}/:_authToken=${token}\n`,
+);
 
 function git(dir, args) {
   return execFileSync("git", ["-C", dir, ...args], { encoding: "utf8" }).trim();
@@ -96,7 +106,7 @@ for (const pkg of ordered) {
   try {
     execFileSync(
       "npm",
-      ["publish", "--registry", REGISTRY, "--access", "public", "--tag", "latest"],
+      ["publish", "--registry", REGISTRY, "--access", "public", "--tag", "latest", "--userconfig", npmrcPath],
       { cwd: pkg.dir, stdio: "inherit", env: { ...process.env, NODE_AUTH_TOKEN: token } },
     );
   } catch {
