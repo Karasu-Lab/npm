@@ -30,3 +30,7 @@
 	path = packages/utils
 	url = https://github.com/Karasu-Lab/utils-package.git
 	branch = main
+[submodule "packages/sdk"]
+	path = packages/sdk
+	url = https://github.com/Karasu-Lab/sdk.git
+	branch = main
