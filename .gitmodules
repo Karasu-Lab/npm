@@ -1,0 +1,32 @@
+[submodule "packages/api-permissions"]
+	path = packages/api-permissions
+	url = https://github.com/Karasu-Lab/api-permissions-package.git
+	branch = main
+[submodule "packages/challengetoken"]
+	path = packages/challengetoken
+	url = https://github.com/Karasu-Lab/challengetoken-package.git
+	branch = main
+[submodule "packages/db"]
+	path = packages/db
+	url = https://github.com/Karasu-Lab/db-package.git
+	branch = main
+[submodule "packages/docker"]
+	path = packages/docker
+	url = https://github.com/Karasu-Lab/docker-package.git
+	branch = main
+[submodule "packages/flags"]
+	path = packages/flags
+	url = https://github.com/Karasu-Lab/flags-package.git
+	branch = main
+[submodule "packages/types"]
+	path = packages/types
+	url = https://github.com/Karasu-Lab/types-package.git
+	branch = main
+[submodule "packages/ui"]
+	path = packages/ui
+	url = https://github.com/Karasu-Lab/ui-package.git
+	branch = main
+[submodule "packages/utils"]
+	path = packages/utils
+	url = https://github.com/Karasu-Lab/utils-package.git
+	branch = main

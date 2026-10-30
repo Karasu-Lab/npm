@@ -1,0 +1,32 @@
+name: Publish packages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository and its package submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Update every package submodule to its latest main
+        run: git submodule update --remote
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Publish unpublished package versions to GitHub Packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/publish.mjs
