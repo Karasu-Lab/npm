@@ -96,7 +96,7 @@ for (const pkg of ordered) {
   try {
     execFileSync(
       "npm",
-      ["publish", "--registry", REGISTRY, "--access", "public"],
+      ["publish", "--registry", REGISTRY, "--access", "public", "--tag", "latest"],
       { cwd: pkg.dir, stdio: "inherit", env: { ...process.env, NODE_AUTH_TOKEN: token } },
     );
   } catch {
