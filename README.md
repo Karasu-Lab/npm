@@ -25,6 +25,9 @@ for public packages — that is a GitHub Packages rule:
 ```
 
 Applications that live in the pnpm workspace resolve these packages
-from the workspace sources instead, through `pnpm.overrides` entries
-that map each package to `workspace:*`; both routes resolve the same
-commit, so local development and registry installs cannot drift apart.
+from the workspace sources instead, through the `overrides` section of
+`pnpm-workspace.yaml`, which maps each package to `workspace:*`; both
+routes resolve the same commit, so local development and registry
+installs cannot drift apart. Standalone installs authenticate with a
+user-level `.npmrc`, because current pnpm ignores credential lines in
+repository-controlled `.npmrc` files.
