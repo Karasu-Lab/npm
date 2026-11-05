@@ -39,6 +39,11 @@ function git(dir, args) {
   return execFileSync("git", ["-C", dir, ...args], { encoding: "utf8" }).trim();
 }
 
+function repositoryUrl(dir) {
+  const url = git(dir, ["remote", "get-url", "origin"]);
+  return url.startsWith("http") ? `git+${url}` : url;
+}
+
 const packages = [];
 for (const entry of readdirSync("packages", { withFileTypes: true })) {
   if (!entry.isDirectory()) continue;
@@ -94,6 +99,8 @@ for (const pkg of ordered) {
   const manifest = { ...pkg.manifest };
   delete manifest.private;
   manifest.version = pkg.publishVersion;
+  manifest.repository ??= { type: "git", url: repositoryUrl(pkg.dir) };
+  manifest.publishConfig = { ...manifest.publishConfig, access: "public" };
   for (const field of ["dependencies", "peerDependencies"]) {
     for (const [depName, spec] of Object.entries(manifest[field] ?? {})) {
       if (byName.has(depName) && String(spec).startsWith("workspace:")) {

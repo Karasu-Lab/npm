@@ -14,10 +14,6 @@
 	path = packages/docker
 	url = https://github.com/Karasu-Lab/docker-package.git
 	branch = main
-[submodule "packages/flags"]
-	path = packages/flags
-	url = https://github.com/Karasu-Lab/flags-package.git
-	branch = main
 [submodule "packages/types"]
 	path = packages/types
 	url = https://github.com/Karasu-Lab/types-package.git
@@ -33,4 +29,8 @@
 [submodule "packages/sdk"]
 	path = packages/sdk
 	url = https://github.com/Karasu-Lab/sdk.git
+	branch = main
+[submodule "packages/flags-sdk"]
+	path = packages/flags-sdk
+	url = https://github.com/Karasu-Lab/flags-sdk.git
 	branch = main
