@@ -1,0 +1,5 @@
+{
+  "pointerUpdate": "Pointer update: {pullRequestUrl} bumps {npmRepository} to {commit} with auto-merge enabled. The publish workflow runs once the pointer update is merged.",
+  "published": "Published {packageName}@{version} to GitHub Packages.\n\nPublish workflow run: {workflowRunUrl}",
+  "publishFailed": "Publishing {packageName} at {commit} failed.\n\nPublish workflow run: {workflowRunUrl}"
+}
