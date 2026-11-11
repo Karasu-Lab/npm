@@ -1,0 +1,39 @@
+name: Sync pointers
+
+on:
+  repository_dispatch:
+    types: [pointer-update, link-package, unlink-package]
+  workflow_dispatch:
+    inputs:
+      event:
+        description: The sync event to run
+        required: true
+        type: choice
+        options: [pointer-update, link-package, unlink-package]
+      payload:
+        description: The event payload as JSON
+        required: true
+
+permissions:
+  contents: write
+  id-token: write
+
+concurrency:
+  group: sync-pointers
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - name: Sync the pointer and notify the result
+        env:
+          EVENT_NAME: ${{ github.event.action || inputs.event }}
+          PAYLOAD_JSON: ${{ github.event_name == 'repository_dispatch' && toJSON(github.event.client_payload) || inputs.payload }}
+          NOTIFY_URL: https://admin.karasu256.com/api/internal/pointer-results
+          OIDC_AUDIENCE: https://admin.karasu256.com
+        run: node scripts/sync-pointer.mjs
