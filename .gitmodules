@@ -38,3 +38,7 @@
 	path = packages/flags-package
 	url = https://github.com/Karasu-Lab/flags-package.git
 	branch = main
+[submodule "packages/sse-package"]
+	path = packages/sse-package
+	url = https://github.com/Karasu-Lab/sse-package.git
+	branch = main
