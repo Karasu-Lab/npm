@@ -30,10 +30,6 @@
 	path = packages/sdk
 	url = https://github.com/Karasu-Lab/sdk.git
 	branch = main
-[submodule "packages/flags-sdk"]
-	path = packages/flags-sdk
-	url = https://github.com/Karasu-Lab/flags-sdk.git
-	branch = main
 [submodule "packages/hello-world"]
 	path = packages/hello-world
 	url = https://github.com/Karasu-Lab/hello-world.git
