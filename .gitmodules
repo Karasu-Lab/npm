@@ -38,3 +38,7 @@
 	path = packages/hello-world
 	url = https://github.com/Karasu-Lab/hello-world.git
 	branch = main
+[submodule "packages/flags-package"]
+	path = packages/flags-package
+	url = https://github.com/Karasu-Lab/flags-package.git
+	branch = main
